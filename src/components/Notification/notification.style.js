@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export default styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 20px;
   background-color: ${({ primary }) =>
     (primary === true && "#fa3e3e") || "#23c552"};
   color: #fff;
@@ -11,5 +14,5 @@ export default styled.div`
   box-shadow: 3px 3px 6px -4px #777;
   border-radius: 5px;
   margin: 10px 0;
-  transition: background-color all 0.5s ease;
+  transition: all 0.5s ease;
 `;
