@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import ShoppingSummaryCartWrapper from "./shoppingSummaryCart.style";
 import Button from "../Button";
 import ButtonWrapper from "../ButtonWrapper";
+import Notification from "../Notification";
+
+import ShoppingSummaryCartWrapper from "./shoppingSummaryCart.style";
 import { priceShipping, grandTotal } from "../../helpers";
 
 const ShoppingSummaryCart = ({ makeOrder, value, shippingfree }) => {
+  const [errorNotification, setErrorNotification] = useState(false);
+  const [updateNotification, setUpdateNotification] = useState(false);
+
+  useEffect(() => {
+    if (value > 0) {
+      setUpdateNotification(true);
+      setErrorNotification(false);
+      const interval = setInterval(() => {
+        setUpdateNotification(false);
+      }, 500);
+      return () => clearInterval(interval);
+    }
+  }, [value]);
+
   const history = useHistory();
+
   const navigateTo = () => {
-    makeOrder();
-    return history.push("/completed");
+    if (value > 0) {
+      setErrorNotification(false);
+      makeOrder();
+      history.push("/completed");
+    } else {
+      setErrorNotification(true);
+    }
   };
 
   return (
@@ -19,12 +41,15 @@ const ShoppingSummaryCart = ({ makeOrder, value, shippingfree }) => {
       <ButtonWrapper>
         <Button onClick={navigateTo}>Proceed to checkout</Button>
       </ButtonWrapper>
+      {errorNotification ? (
+        <Notification primary={true}>The quantity cannot be zero</Notification>
+      ) : null}
+      {updateNotification ? <Notification>Summary Update</Notification> : null}
       <div>
         <div className="wrapper__shipping">
           <p>Shipping</p>
           <p>{priceShipping(shippingfree)}</p>
         </div>
-
         <div className="wrapper__total">
           <p>Cart Totals</p>
           <div>
