@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { fetchData } from "../../actions";
+import {
+  fetchData,
+  completedCart,
+  updateCart,
+  removeItem,
+} from "../../actions";
 import { data } from "../../assets/data";
 
 // import styled from "styled-components";
@@ -17,11 +22,20 @@ import ShoppingWrapperList from "../../components/ShoppingWrapperList";
 import ShoppingSummaryCart from "../../components/ShoppingSummaryCart";
 import ShoppingList from "../../components/ShoppingList";
 import ButtonWrapper from "../../components/ButtonWrapper";
+import { sumPrice } from "../../helpers";
 
-const CartPage = ({ getProducts, products }) => {
+const CartPage = ({
+  getProducts,
+  products,
+  makeOrder,
+  shippingfree,
+  value,
+  updateCart,
+  removeItem,
+}) => {
   const [quantity, setQuantity] = useState(0);
 
-  useEffect(() => getProducts(data), [getProducts, products]);
+  useEffect(() => getProducts(data), [getProducts]);
 
   return (
     <Wrapper>
@@ -35,13 +49,23 @@ const CartPage = ({ getProducts, products }) => {
                 products={products}
                 quantity={quantity}
                 setQuantity={setQuantity}
+                updateCart={updateCart}
+                removeItem={removeItem}
               />
               <ButtonWrapper>
-                <Button>Update Shopping Cart</Button>
+                <Button
+                  onClick={() => updateCart(quantity, sumPrice(products))}
+                >
+                  Update Shopping Cart
+                </Button>
               </ButtonWrapper>
             </ShoppingList>
           </ShoppingWrapperList>
-          <ShoppingSummaryCart />
+          <ShoppingSummaryCart
+            makeOrder={makeOrder}
+            shippingfree={shippingfree}
+            value={value}
+          />
         </>
       ) : (
         <Loader />
@@ -52,15 +76,27 @@ const CartPage = ({ getProducts, products }) => {
 
 CartPage.propTypes = {
   getProducts: PropTypes.func.isRequired,
+  makeOrder: PropTypes.func.isRequired,
+  updateCart: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({})),
+  shippingfree: PropTypes.bool,
+  value: PropTypes.number,
+  removeItem: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    shippingfree: state.shippingfree,
+    value: state.value,
   };
 };
 
-const mapDispatchToProps = { getProducts: fetchData };
+const mapDispatchToProps = {
+  getProducts: fetchData,
+  makeOrder: completedCart,
+  updateCart,
+  removeItem,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartPage);

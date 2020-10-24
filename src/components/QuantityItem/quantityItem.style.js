@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export default styled.div`
   display: flex;
+  align-items: center;
 
   span {
     background-color: #f4f4f4;
@@ -21,6 +22,7 @@ export default styled.div`
     border-top: 1px solid #d7d7d7;
     border-bottom: 1px solid #d7d7d7;
     text-align: center;
+    align-self: stretch;
     -moz-appearance: textfield;
 
     &::-webkit-outer-spin-button,
@@ -28,5 +30,9 @@ export default styled.div`
       -webkit-appearance: none;
       margin: 0;
     }
+  }
+
+  img {
+    cursor: pointer;
   }
 `;

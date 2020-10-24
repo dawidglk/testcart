@@ -15,8 +15,12 @@ export const fetchData = (data) => (dispatch) => {
   setTimeout(() => dispatch(receivedData(data)), 1000);
 };
 
-export const removeItem = () => ({ type: REMOVE_ITEM });
+export const removeItem = (id) => ({ type: REMOVE_ITEM, id });
 
-export const updateCart = () => ({ type: UPDATE_CART });
+export const updateCart = (value, price) => ({
+  type: UPDATE_CART,
+  value,
+  price,
+});
 
 export const completedCart = () => ({ type: COMPLETED_CART });

@@ -49,6 +49,12 @@ export default styled.div`
             p {
               color: #777777;
               font-weight: bold;
+              display: flex;
+              align-items: center;
+
+              &.grand {
+                font-size: 20px;
+              }
 
               &:last-child {
                 color: #000;
