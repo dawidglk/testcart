@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
 export default styled.div`
-  width: 80%;
+  width: 100;
+
+  @media (min-width: 800px) {
+    width: 80%;
+  }
 `;

@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
 export default styled.div`
-  width: 20%;
-  margin-left: 30px;
-  margin-bottom: 40px;
+  width: 100%;
   align-self: center;
   font-size: 16px;
+  margin-top: 10px;
+
+  @media (min-width: 800px) {
+    width: 20%;
+    margin-left: 30px;
+    margin-bottom: 23px;
+    margin-top: 0;
+  }
 
   div {
     &.wrapper {
