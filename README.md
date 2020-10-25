@@ -8,4 +8,4 @@
 - redux
 - redux-router
 - redux-thunk
-- styled-components
+- styled-components (scss)
