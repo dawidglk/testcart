@@ -6,6 +6,6 @@
 
 - react
 - redux
-- redux-router
+- react-router
 - redux-thunk
 - styled-components (scss)
