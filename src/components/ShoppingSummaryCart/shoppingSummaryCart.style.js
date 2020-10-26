@@ -26,10 +26,15 @@ export default styled.div`
         border: 1px solid #d7d7d7;
       }
       &__total {
+        background: #fbfbfb;
         margin-top: 16px;
         border: 1px solid #d7d7d7;
         padding-bottom: 16px;
         text-align: center;
+
+        button {
+          width: 100%;
+        }
 
         > p {
           background-color: #f4f4f4;

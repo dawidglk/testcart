@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 
   p {
     color: #777777;
@@ -10,7 +10,7 @@ export default styled.div`
     margin: 0;
 
     &:first-child {
-      width: 80px;
+      width: 90px;
     }
   }
 `;

@@ -61,8 +61,8 @@ const ShoppingSummaryCart = ({ makeOrder, value, shippingfree }) => {
               <p>Grand Total</p>
               <p className="grand">{grandTotal(value, shippingfree) || `$0`}</p>
             </div>
+            <Button onClick={navigateTo}>Proceed to checkout</Button>
           </div>
-          <Button onClick={navigateTo}>Proceed to checkout</Button>
         </div>
       </div>
     </ShoppingSummaryCartWrapper>
